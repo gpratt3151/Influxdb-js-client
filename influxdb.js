@@ -58,12 +58,22 @@ class Influxdb {
         var data = this.implodePoints();
         if (data) {
             var request = new XMLHttpRequest();
-            request.open('POST', this.host, true);
+            request.open('POST', this.host, false);
             request.setRequestHeader('Content-Type', 'text/plain; charset=UTF-8');
             request.send(data);
         }
 
         this.points = [];
+    }
+
+    sendRaw() {
+        var data = influxEntry;
+        if (data) {
+            var request = new XMLHttpRequest();
+            request.open('POST', this.host, false);
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            request.send(data);
+        }
     }
 
 
