@@ -51,6 +51,42 @@ you can also use the short verse like:
 influxdb.point('key',{value:1},{tag:'tag_name'}).send();
 ```
 
+## Using sendRaw()
+
+```html
+  <div>
+    <p>
+    Title
+    <input type="text" required name=title>
+    </p>
+    <p>
+    Annotation
+    <input type="text" required name=annotation>
+    </p>
+    <p>
+    Tags
+    <input type="text" required name=tags>
+    </p>
+    <p>
+    <input type="submit">
+    </p>
+  </div>
+```
+
+```javascript
+  influxdb = new Influxdb('http://server:8086/write?db=mydb&precision=ms',false);
+
+  title = document.myForm.title.value;
+  annotation = document.myForm.annotation.value;
+  tags = document.myForm.tags.value;
+
+  influxEntry = 'events title="' + title +'",text="' + annotation + '",tags="' + tags + '" ' + time +'';
+
+  // My extension in influxdb.js to allow sending pre-formatted data (raw). Use sendRaw
+  //influxdb.send();
+  influxdb.sendRaw(influxEntry);
+```
+
 # Api
 
 ```javascript
